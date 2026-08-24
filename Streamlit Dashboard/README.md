@@ -29,25 +29,6 @@ Die App öffnet sich im Browser (Standard: http://localhost:8501).
 | `layout_config.json` | Dashboard-Layout/Design (entsteht erst beim Einfrieren, siehe unten) |
 | `requirements.txt` | Abhängigkeiten |
 
-## Dashboard anpassen & einfrieren
-
-In der Sidebar gibt es „🔧 Dashboard anpassen" (nur solange das Layout nicht
-eingefroren ist). Dort lassen sich für **beide Ansichten** einstellen:
-
-- **Reihenfolge** der Bausteine (▲/▼) und **Ein-/Ausblenden** einzelner Bausteine
-- **Spaltenbreiten** (Einzelindex: Ampel-Banner/Gauge/Signal-Chips) und **Höhen**
-  aller Diagramme
-- **Schriftgröße**
-- **Farben** (Hintergrund, Karten, Text, Akzent, sowie Grün/Gelb/Rot der Ampel)
-
-Alle Änderungen wirken **sofort** (Live-Vorschau). Mit „💾 Speichern & einfrieren"
-wird die aktuelle Einstellung in `layout_config.json` geschrieben und der Editor
-**dauerhaft** ausgeblendet — auch nach einem Neustart der App. Ein Reset ist dann
-nur noch möglich, indem man `layout_config.json` löscht oder das Feld
-`"gesperrt": false` darin setzt (bewusst nicht über die Oberfläche zugänglich).
-„↩️ Auf Standard zurücksetzen" setzt vor dem Einfrieren alle Werte auf die
-Vorgabe zurück (wirkt nur auf die noch nicht gespeicherte Live-Vorschau).
-
 ## Methodik (Kurzfassung)
 
 Die Ampel kombiniert **vier Indikator-Familien**: Trend (SMA20/100/200-Regeln
@@ -68,28 +49,11 @@ Index bis zu 6 Stunden gecached. Marktbreite und Put/Call-Ratio sind dagegen
 **nicht live verfügbar** (siehe unten) und liegen als mit der App gebündelte
 Dateien vor.
 
-## Daten aktuell halten
-
-`marktbreite_daten/*.csv` (je Index) und `pcr_daten.csv` sind TradingView-
-Exporte ohne bekannte Live-API und werden **nicht** bei jedem Aufruf neu
-geladen. Das hat eine sichtbare Folge: Der "aktuelle Tag" der Ampel fällt
-automatisch auf den letzten Tag zurück, an dem alle neun Pflichtsignale
-auswertbar sind – bleiben Marktbreite/PCR tagelang unaktualisiert, hinkt die
-Ampel entsprechend hinterher (in der App als Datenstand-Hinweis sichtbar).
-
-Zum Aktualisieren: neue Exporte besorgen (je Index die "20 SMA"-Marktbreite-
-Datei bzw. die marktweite PCR-Datei), die bestehenden Dateien in
-`marktbreite_daten/` bzw. `pcr_daten.csv` ersetzen, committen und auf den
-`risikoampel-dashboard`-Branch pushen – Streamlit Cloud deployt automatisch
-neu.
-
 ## Validierung
 
 `ampel_core` reproduziert die Ampel des Notebooks (Abgleich der Fenster-
 Startdaten, Anteil-Rot und Calmar-Größenordnung je Index gegen die
 Notebook-Ausgabe). `_referenz/*_Ampel_Zeitreihe.csv` wird direkt aus
-`ampel_core` selbst erzeugt (das Notebook liefert seit dem Umbau auf vier
-Indikator-Familien keinen fertigen CSV-Export mehr) und dient als
-Regressionsbasis für künftige Änderungen.
+`ampel_core` selbst erzeugt und dient als Regressionsbasis für künftige Änderungen.
 
 > Explorative Analyse historischer Daten – keine Anlageberatung.
