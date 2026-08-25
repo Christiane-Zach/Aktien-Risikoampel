@@ -12,12 +12,11 @@ Für die Risikoampel wurden insgesamt **36 Hypothesen** zu verschiedenen Marktin
 
 Untersucht wurden insbesondere:
 
-* Advancing / Declining Stocks
-* Advancing / Declining Volume
 * gleitende Durchschnitte
 * Marktbreite
 * Put/Call Ratio
 * Volatilitätsindizes
+* Advancing / Declining Stocks and Volume
 
 Die Hypothesen wurden anhand verschiedener US-Aktienindizes getestet:
 
